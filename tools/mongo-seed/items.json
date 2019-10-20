@@ -1,0 +1,92 @@
+[
+  {
+    "_id": {
+      "$oid": "5c7e3cf664043f50a0b46d9e"
+    },
+    "_class": "ItemDocument",
+    "name": "Item 1",
+    "count": "2",
+    "source": "Mongo"
+  },
+  {
+    "_id": {
+      "$oid": "5c7e3cf664043f50a0b46d9f"
+    },
+    "_class": "ItemDocument",
+    "name": "Item 2",
+    "count": "43",
+    "source": "Mongo"
+  },
+  {
+    "_id": {
+      "$oid": "5c7e3cf664043f50a0b46da1"
+    },
+    "_class": "ItemDocument",
+    "name": "Item 3",
+    "count": "12",
+    "source": "Mongo"
+  },
+  {
+    "_id": {
+      "$oid": "5c7e3cf664043f50a0b46da2"
+    },
+    "_class": "ItemDocument",
+    "name": "Item 4",
+    "count": "65",
+    "source": "Mongo"
+  },
+  {
+    "_id": {
+      "$oid": "5c7e3cf664043f50a0b46da3"
+    },
+    "_class": "ItemDocument",
+    "name": "Item 5",
+    "count": "9",
+    "source": "Mongo"
+  },
+  {
+    "_id": {
+      "$oid": "5c7e3cf664043f50a0b46da4"
+    },
+    "_class": "ItemDocument",
+    "name": "Item 6",
+    "count": "352",
+    "source": "Mongo"
+  },
+  {
+    "_id": {
+      "$oid": "5c7e3cf664043f50a0b46da5"
+    },
+    "_class": "ItemDocument",
+    "name": "Item 7",
+    "count": "12",
+    "source": "Mongo"
+  },
+  {
+    "_id": {
+      "$oid": "5c7e3cf664043f50a0b46da6"
+    },
+    "_class": "ItemDocument",
+    "name": "Item 8",
+    "count": "71",
+    "source": "Mongo"
+  },
+  {
+    "_id": {
+      "$oid": "5c7e3cf664043f50a0b46da7"
+    },
+    "_class": "ItemDocument",
+    "name": "Item 9",
+    "count": "84",
+    "source": "Mongo"
+  },
+  {
+    "_id": {
+      "$oid": "5c7e3cf664043f50a0b46da0"
+    },
+    "_class": "ItemDocument",
+    "name": "Item 10",
+    "count": "98",
+    "source": "Mongo"
+  }
+]

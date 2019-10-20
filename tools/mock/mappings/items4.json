@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/items/5c7e3cf664043f50a0b46db4"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": "5c7e3cf664043f50a0b46db4",
+      "name": "Item 4",
+      "count": "72",
+      "source": "http mock"
+    }
+  }
+}

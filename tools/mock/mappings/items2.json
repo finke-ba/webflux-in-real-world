@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/items/5c7e3cf664043f50a0b46db2"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": "5c7e3cf664043f50a0b46db2",
+      "name": "Item 2",
+      "count": "5",
+      "source": "http mock"
+    },
+    "delayDistribution": {
+      "type": "uniform",
+      "lower": 100,
+      "upper": 5000
+    }
+  }
+}

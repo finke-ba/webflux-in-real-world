@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  mongo:
+    container_name: jug_shoucase_mongo
+    image: mongo:latest
+    ports:
+      - "27020:27017"
+  mongo_seed:
+    container_name: jug_shoucase_mongo_seed
+    image: mongo:latest
+    links:
+      - mongo
+    volumes:
+      - ./mongo-seed:/mongo-seed
+    command:
+      /mongo-seed/import.sh
+  wiremock:
+    image: rodolpheche/wiremock
+    ports:
+      - "9999:8080"
+    volumes:
+      - ./mock:/home/wiremock

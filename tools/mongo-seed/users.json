@@ -1,0 +1,10 @@
+[
+  {
+    "_id": {
+      "$oid": "5c7e3cf664043f50a0b46d9e"
+    },
+    "_class": "UserDocument",
+    "name": "user",
+    "password": "{bcrypt}$2a$10$K0B2XKgqxdeUou62iDmOc.D1db1E/3NIXJXDRuO7k0x16WWrqpguW"
+  }
+]
