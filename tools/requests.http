@@ -1,4 +1,5 @@
 # Data Base
 GET http://localhost:8081/db/items?id=5c7e3cf664043f50a0b46d9e
+Authorization: Basic user password
 
 ###
