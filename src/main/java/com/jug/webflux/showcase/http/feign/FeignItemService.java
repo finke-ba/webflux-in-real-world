@@ -14,13 +14,13 @@ public class FeignItemService {
 
     private final FeignItemClient feignItemClient;
 
-    public FeignItemService(FeignItemClient feignItemClient) {
+    public FeignItemService(@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") FeignItemClient feignItemClient) {
         this.feignItemClient = feignItemClient;
     }
 
     public Mono<Item> getItem(String id) {
-        return Mono.fromCallable(() -> feignItemClient.getItem(id))
-                .doOnNext(item -> LOG.info("Got item from blocking resource with Feign Client - {}", item))
+        return feignItemClient.getItem(id)
+                .doOnNext(item -> LOG.info("Got item from blocking resource with Reactive Feign Client - {}", item))
                 .subscribeOn(Schedulers.elastic());
     }
 
