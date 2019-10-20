@@ -15,3 +15,22 @@ GET http://localhost:8081/http/items/feign?id=5c7e3cf664043f50a0b46db1
 Authorization: Basic user password
 
 ###
+
+# Login
+# You should put cookie first to http-client.cookies - 'localhost	/	XSRF-TOKEN	ae6a05a9-37bc-443d-b704-4563f9fefd6e	-1'
+POST http://localhost:8081/login
+Content-Type: application/json
+X-XSRF-TOKEN: ae6a05a9-37bc-443d-b704-4563f9fefd6e
+
+{
+  "name": "name",
+  "password": "password"
+}
+
+###
+
+# Logout
+POST http://localhost:8081/logout
+X-XSRF-TOKEN: ae6a05a9-37bc-443d-b704-4563f9fefd6e
+
+###
