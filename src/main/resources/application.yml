@@ -6,3 +6,5 @@ spring:
     uri: mongodb://localhost:27020/showcase
 
 items.service.uri: http://localhost:9999
+
+cors.allowed.origins: http://localhost:4100

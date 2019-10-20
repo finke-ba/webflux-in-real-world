@@ -14,29 +14,43 @@ import org.springframework.security.web.server.authentication.HttpStatusServerEn
 import org.springframework.security.web.server.context.ServerSecurityContextRepository;
 import org.springframework.security.web.server.context.WebSessionServerSecurityContextRepository;
 import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
+import org.springframework.security.web.server.csrf.ServerCsrfTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import reactivefeign.webclient.WebReactiveFeign;
+
+import java.util.Arrays;
 
 @EnableWebFluxSecurity
 public class SecurityConfig {
+
+    @Value("${cors.allowed.origins:}")
+    private String[] allowedCorsOrigins;
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http,
                                                          ReactiveAuthenticationManager authenticationManager,
                                                          ServerCodecConfigurer serverCodecConfigurer,
                                                          ServerSecurityContextRepository serverSecurityContextRepository,
-                                                         ServerAuthenticationEntryPoint entryPoint) {
+                                                         ServerAuthenticationEntryPoint entryPoint,
+                                                         CorsConfigurationSource corsConfigurationSource,
+                                                         ServerCsrfTokenRepository cookieServerCsrfTokenRepository) {
         return http
                 .addFilterAt(new LoginWebFilter(authenticationManager, serverCodecConfigurer, serverSecurityContextRepository), SecurityWebFiltersOrder.AUTHENTICATION)
+                .addFilterAt(new CsrfCookieInsertFilter(), SecurityWebFiltersOrder.REACTOR_CONTEXT)
                 .exceptionHandling()
                 .authenticationEntryPoint(entryPoint)
                 .and()
                 .logout()
                 .and()
                 .authorizeExchange()
-                .pathMatchers("/login").permitAll()
+                .pathMatchers("/login", "/health").permitAll()
                 .anyExchange().authenticated()
                 .and()
-                .csrf().csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse())
+                .csrf().csrfTokenRepository(cookieServerCsrfTokenRepository)
+                .and()
+                .cors().configurationSource(corsConfigurationSource)
                 .and()
                 .build();
     }
@@ -52,7 +66,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public ServerSecurityContextRepository serverSecurityContextRepository() {
+    ServerSecurityContextRepository serverSecurityContextRepository() {
         return new WebSessionServerSecurityContextRepository();
     }
 
@@ -61,6 +75,38 @@ public class SecurityConfig {
         return WebReactiveFeign
                 .<AuthClient>builder()
                 .target(AuthClient.class, url);
+    }
+
+    @Bean
+    ServerCsrfTokenRepository cookieServerCsrfTokenRepository() {
+        final CookieServerCsrfTokenRepository csrfTokenRepository = CookieServerCsrfTokenRepository.withHttpOnlyFalse();
+        csrfTokenRepository.setCookieHttpOnly(false);
+        return csrfTokenRepository;
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration corsConfig = new CorsConfiguration();
+
+        corsConfig.setAllowedOrigins(Arrays.asList(allowedCorsOrigins));
+
+        corsConfig.addAllowedMethod("GET");
+        corsConfig.addAllowedMethod("POST");
+        corsConfig.addAllowedMethod("PUT");
+        corsConfig.addAllowedMethod("PATCH");
+        corsConfig.addAllowedMethod("DELETE");
+        corsConfig.addAllowedMethod("HEAD");
+        corsConfig.addAllowedMethod("OPTIONS");
+
+        corsConfig.addAllowedHeader("Content-Type");
+        corsConfig.addAllowedHeader("X-XSRF-TOKEN");
+
+        corsConfig.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfig);
+
+        return source;
     }
 
 }

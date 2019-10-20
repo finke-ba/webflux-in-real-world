@@ -1,0 +1,14 @@
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<h2>Click for sending SSE request to url 'http://localhost:8081/stream' </h2>
+<button (click)="getHealth()" style="font-size: large"> Health </button>
+<p></p>
+<button (click)="login()" style="font-size: large"> Login </button>
+<p></p>
+<button (click)="sendRequest()" style="font-size: large"> Sse request </button>
+
+<p *ngFor="let message of messages"> {{message.id}} {{message.name}} </p>
+
