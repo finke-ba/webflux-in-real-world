@@ -1,2 +1,6 @@
 server:
   port: 8081
+
+spring:
+  data.mongodb:
+    uri: mongodb://localhost:27020/showcase
