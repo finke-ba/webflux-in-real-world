@@ -3,3 +3,9 @@ GET http://localhost:8081/db/items?id=5c7e3cf664043f50a0b46d9e
 Authorization: Basic user password
 
 ###
+
+# Web Client
+GET http://localhost:8081/http/items/webclient?id=5c7e3cf664043f50a0b46db1
+Authorization: Basic user password
+
+###
